@@ -160,6 +160,12 @@ We don't provide a docker file but see [#113](https://github.com/facebookresearc
 ### Local install
 
 ```
+pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu130
+```
+
+
+
+```
 CUDA_HOME=/usr/local/cuda \
 CUDA_PATH=/usr/local/cuda \
 PATH=/usr/local/cuda/bin:$PATH \
@@ -168,13 +174,8 @@ MAX_JOBS=2 \
 pip install -e /PATH/TO/REPO --no-build-isolation
 ```
 
-### 
+Download flash_attn
 
-```
-CUDA_HOME=/usr/local/cuda
-CUDA_PATH=/usr/local/cuda
-PATH=/usr/local/cuda/bin:$PATH
-FORCE_CUDA=1
-MAX_JOBS=2
-pip wheel /PATH/TO/REPO --no-build-isolation -w dist/
-```
+https://mjunya.com/flash-attention-prebuild-wheels/?cuda=13.1
+
+pip install path/to/file.whl
