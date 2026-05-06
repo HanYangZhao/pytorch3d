@@ -155,3 +155,26 @@ python3 -m unittest discover -v -s tests -t .
 ### Can I use Docker?
 
 We don't provide a docker file but see [#113](https://github.com/facebookresearch/pytorch3d/issues/113) for a docker file shared by a user (NOTE: this has not been tested by the PyTorch3D team).
+
+
+### Local install
+
+```
+CUDA_HOME=/usr/local/cuda \
+CUDA_PATH=/usr/local/cuda \
+PATH=/usr/local/cuda/bin:$PATH \
+FORCE_CUDA=1 \
+MAX_JOBS=2 \
+pip install -e /PATH/TO/REPO --no-build-isolation
+```
+
+### 
+
+```
+CUDA_HOME=/usr/local/cuda
+CUDA_PATH=/usr/local/cuda
+PATH=/usr/local/cuda/bin:$PATH
+FORCE_CUDA=1
+MAX_JOBS=2
+pip wheel /PATH/TO/REPO --no-build-isolation -w dist/
+```
