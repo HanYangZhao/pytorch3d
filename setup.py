@@ -90,6 +90,17 @@ def get_extensions():
                         "-static-global-template-stub=false",
                     ]
                 )
+                # CUDA 13 + glibc conflict: crt/math_functions.h declares
+                # rsqrt/rsqrtf without noexcept, while glibc's bits/mathcalls.h
+                # adds noexcept(true), causing an incompatible exception spec error.
+                # Fix: shadow bits/mathcalls.h with a wrapper that temporarily
+                # strips __THROW so glibc's declarations match CUDA's.
+                compat_dir = os.path.join(
+                    os.path.dirname(os.path.abspath(__file__)), "cuda13_compat"
+                )
+                nvcc_args.append(
+                    "--compiler-options=-isystem,{}".format(compat_dir)
+                )
         if cub_home is None:
             prefix = os.environ.get("CONDA_PREFIX", None)
             if prefix is not None and os.path.isdir(prefix + "/include/cub"):
